@@ -44,10 +44,11 @@ aBilateralFilter<T>::aBilateralFilter(double sigmaD, double sigmaR) {
     
     int kernelSize = mKernelRadius * 2 + 1;
     mKernelD.resize(kernelSize);
+    int center = (kernelSize - 1) / 2;
     for (size_t x = 0; x < kernelSize; ++x) {
         mKernelD[x].resize(kernelSize);
         for (size_t y = 0; y < kernelSize; ++y) {
-            mKernelD[x][y] = this->gauss(sigmaD, x, y);
+            mKernelD[x][y] = this->gauss(sigmaD, x - center, y - center);
         }
     }
 
